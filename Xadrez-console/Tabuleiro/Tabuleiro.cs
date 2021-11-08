@@ -61,7 +61,7 @@
 				_pecas[posicao.Linha, posicao.Coluna] = peca;
 				peca.Posicao = posicao;
 			}
-			throw new TabuleiroExceptions("Erro na insercao de peca");
+			throw new TabuleiroExceptions("Ja uma existe peça nessa posição!");
 		}
 	}
 }
