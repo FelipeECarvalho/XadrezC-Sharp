@@ -56,12 +56,13 @@
 
 		public void InserePeca(Peca peca, Posicao posicao)
 		{
-			if (!ExistePeca(posicao)) 
+			if (ExistePeca(posicao)) 
 			{
-				_pecas[posicao.Linha, posicao.Coluna] = peca;
-				peca.Posicao = posicao;
+				throw new TabuleiroExceptions("Ja uma existe peça nessa posição!");
 			}
-			throw new TabuleiroExceptions("Ja uma existe peça nessa posição!");
+			_pecas[posicao.Linha, posicao.Coluna] = peca;
+			peca.Posicao = posicao;
+
 		}
 	}
 }

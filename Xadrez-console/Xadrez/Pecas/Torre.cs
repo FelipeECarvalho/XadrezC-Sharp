@@ -1,4 +1,6 @@
-﻿namespace tabuleiro
+﻿using tabuleiro;
+
+namespace Xadrez
 {
 	class Torre : Peca
 	{
