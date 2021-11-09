@@ -1,5 +1,6 @@
 ﻿using tabuleiro;
 using System;
+
 namespace Xadrez_console
 {
 	class Tela
@@ -20,7 +21,7 @@ namespace Xadrez_console
 						else 
 						{
 							ConsoleColor aux = Console.ForegroundColor;
-							Console.ForegroundColor = ConsoleColor.Yellow;
+							Console.ForegroundColor = ConsoleColor.Green;
 							Console.Write($" {tabuleiro.GetPeca(i, j)} ");
 							Console.ForegroundColor = aux;
 						}
@@ -37,6 +38,7 @@ namespace Xadrez_console
 			{
 				Console.Write($" {(char)i} ");
 			}
+			Console.WriteLine();
 		}
 	}
 }

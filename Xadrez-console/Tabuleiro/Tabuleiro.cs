@@ -64,5 +64,18 @@
 			peca.Posicao = posicao;
 
 		}
+
+		public Peca RetirarPeca(Posicao posicao) 
+		{
+			if (_pecas[posicao.Linha, posicao.Coluna] == null) 
+			{
+				return null;
+			}
+			Peca aux = _pecas[posicao.Linha, posicao.Coluna];
+			aux.Posicao = null;
+			_pecas[posicao.Linha, posicao.Coluna] = null;
+			return aux;
+			
+		}
 	}
 }

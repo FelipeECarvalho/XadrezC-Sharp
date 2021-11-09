@@ -1,26 +1,28 @@
 ﻿using tabuleiro;
+using System;
 
 namespace Xadrez
 {
-	class PosicaoXadrez
+	class PosicaoXadrez : Posicao
 	{
-		public char Coluna { get; set; }
-		public int Linha { get; set; }
-
 		public PosicaoXadrez(char coluna, int linha) 
 		{
 			Linha = linha;
 			Coluna = coluna;
+
+		}
+
+		public static PosicaoXadrez LerPosicaoXadrez() 
+		{
+			string posicao = Console.ReadLine();
+			char coluna = posicao[0];
+			int linha = int.Parse(posicao[1..]);
+			return new PosicaoXadrez(coluna, linha);
 		}
 
 		public Posicao ConvertePosicao() 
 		{
 			return new Posicao(8 - Linha, Coluna - 'a');
-		}
-
-		public override string ToString()
-		{
-			return "" + Coluna + Linha;
 		}
 	}
 }
