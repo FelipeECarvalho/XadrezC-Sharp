@@ -14,24 +14,17 @@ namespace Xadrez_console
 				try
 				{
 					Console.Clear();
-					Tela.ImprimeTabuleiro(partida.Tabuleiro);
-					Console.WriteLine();
-					Console.WriteLine();
-					Console.WriteLine("Turno: " + partida.Turno);
-					Console.WriteLine("Aguardando a jogada das " + (partida.JogadorAtual).ToString() + "s");
-
-					Console.WriteLine();
+					Tela.ImprimirInformacaoDeJogo(partida);
 					Console.Write("Posição da peça: ");
 					Posicao origem = PosicaoXadrez.LerPosicaoXadrez().ConvertePosicao();
 					partida.VerificaOrigem(origem);
 
+
 					bool[,] posicoesPossiveis = partida.Tabuleiro.GetPeca(origem).MovimentosPossiveis();
 					Console.Clear();
-					Tela.ImprimeTabuleiro(partida.Tabuleiro, posicoesPossiveis);
+					Tela.ImprimirInformacaoDeJogo(partida);
 
 
-					Console.WriteLine();
-					Console.WriteLine();
 					Console.Write("Posição de Destino: ");
 					Posicao destino = PosicaoXadrez.LerPosicaoXadrez().ConvertePosicao();
 					partida.VerificaDestino(destino, posicoesPossiveis);
