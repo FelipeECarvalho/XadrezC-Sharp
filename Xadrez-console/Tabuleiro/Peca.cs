@@ -7,6 +7,7 @@
 		public int QteMovimentos { get; protected set; }
 		public Tabuleiro Tabuleiro { get; protected set; }
 
+
 		public Peca()
 		{
 		}
@@ -23,5 +24,7 @@
 		{
 			QteMovimentos++;
 		}
+
+		public abstract bool[,] MovimentosPossiveis();
 	}
 }

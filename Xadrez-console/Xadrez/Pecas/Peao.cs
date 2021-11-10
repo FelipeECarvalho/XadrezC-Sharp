@@ -2,7 +2,7 @@
 
 namespace Xadrez
 {
-	class Peao : Peca
+	class Peao
 	{
 
 	}
