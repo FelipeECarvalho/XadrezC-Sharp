@@ -25,6 +25,11 @@
 			QteMovimentos++;
 		}
 
+		public void DecrementaMovimento() 
+		{
+			QteMovimentos--;
+		}
+
 		public abstract bool[,] MovimentosPossiveis();
 	}
 }

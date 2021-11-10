@@ -22,7 +22,7 @@ namespace Xadrez_console
 
 					bool[,] posicoesPossiveis = partida.Tabuleiro.GetPeca(origem).MovimentosPossiveis();
 					Console.Clear();
-					Tela.ImprimirInformacaoDeJogo(partida);
+					Tela.ImprimirTabuleiro(partida.Tabuleiro, posicoesPossiveis);
 
 
 					Console.Write("Posição de Destino: ");
