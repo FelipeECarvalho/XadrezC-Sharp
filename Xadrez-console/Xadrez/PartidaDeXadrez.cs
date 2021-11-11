@@ -40,17 +40,17 @@ namespace Xadrez
 			return pecaCapturada;
 		}
 
-		public void DesfazMovimento(Posicao posicaoOrigem, Posicao posicaoDestino, Peca pecaCapturada) 
+		public void DesfazMovimento(Posicao posicaoOrigem, Posicao posicaoDestino, Peca pecaCapturada)
 		{
 			Peca pecaCapturadora = Tabuleiro.RetirarPeca(posicaoDestino);
 			pecaCapturadora.DecrementaMovimento();
-			if (pecaCapturada != null) 
+			if (pecaCapturada != null)
 			{
 				Tabuleiro.InserePeca(pecaCapturada, posicaoDestino);
 				_pecasCapturadas.Remove(pecaCapturada);
 			}
 			Tabuleiro.InserePeca(pecaCapturadora, posicaoOrigem);
-			
+
 		}
 
 		private Cor Adversario(Cor cor)
@@ -82,12 +82,45 @@ namespace Xadrez
 			foreach (Peca peca in PecasEmJogo(Adversario(cor)))
 			{
 				bool[,] movimentos = peca.MovimentosPossiveis();
-				if (movimentos[rei.Posicao.Linha, rei.Posicao.Coluna])
+				if (movimentos[rei.Posicao.Linha, rei.Posicao.Coluna] == true)
 				{
 					return true;
 				}
 			}
 			return false;
+		}
+
+		public bool TesteXequeMate(Cor cor)
+		{
+			if (!EstaEmXeque(cor))
+			{
+				return false;
+			}
+			foreach (Peca peca in PecasEmJogo(cor))
+			{
+				bool[,] movimentos = peca.MovimentosPossiveis();
+				for (int i = 0; i < Tabuleiro.Linhas; i++)
+				{
+					for (int j = 0; j < Tabuleiro.Colunas; j++)
+					{
+						if (movimentos[i, j])
+						{
+							Posicao destino = new Posicao(i, j);
+							Posicao origem = peca.Posicao;
+							Peca pecaTeste = ExecutaMovimento(origem, destino);
+							bool TesteXeque = EstaEmXeque(cor);
+							DesfazMovimento(origem, destino, pecaTeste);
+							if (!TesteXeque)
+							{
+								return false;
+							}
+
+						}
+					}
+				}
+
+			}
+			return true;
 		}
 
 
@@ -127,7 +160,7 @@ namespace Xadrez
 		{
 			Peca pecaCapturada = ExecutaMovimento(posicaoOrigem, posicaoDestino);
 
-			if (EstaEmXeque(JogadorAtual)) 
+			if (EstaEmXeque(JogadorAtual))
 			{
 				DesfazMovimento(posicaoOrigem, posicaoDestino, pecaCapturada);
 				throw new TabuleiroExceptions("Você está colocando seu rei em xeque!");
@@ -136,12 +169,19 @@ namespace Xadrez
 			{
 				Xeque = true;
 			}
-			else 
+			else
 			{
 				Xeque = false;
 			}
-			MudaJogador();
-			Turno++;
+			if (TesteXequeMate(Adversario(JogadorAtual)))
+			{
+				Terminada = true;
+			}
+			else
+			{
+				MudaJogador();
+				Turno++;
+			}
 		}
 
 

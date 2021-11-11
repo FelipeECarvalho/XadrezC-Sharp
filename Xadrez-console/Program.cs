@@ -38,6 +38,11 @@ namespace Xadrez_console
 					Console.WriteLine("ERROR: " + e.Message);
 					Console.ReadKey();
 				}
+				catch (SystemException e) 
+				{
+					Console.WriteLine("ERROR: " + e.Message);
+					Console.ReadKey();
+				}
 			}
 
 		}
