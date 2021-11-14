@@ -54,13 +54,6 @@ namespace Xadrez_console
 
 		public static void ImprimirTabuleiro(Tabuleiro tabuleiro)
 		{
-			Console.Write("   ");
-			for (int i = (int)'a'; i < (tabuleiro.Colunas + 'a'); i++)
-			{
-				Console.Write($" {(char)i} ");
-			}
-			Console.WriteLine();
-			Console.WriteLine();
 			for (int i = 0; i < tabuleiro.Linhas; i++)
 			{
 				Console.Write(tabuleiro.Linhas - i + "  ");
@@ -69,7 +62,6 @@ namespace Xadrez_console
 					ImprimirPecas(tabuleiro.GetPeca(i, j));
 
 				}
-				Console.Write($"  {tabuleiro.Linhas - i}  ");
 				Console.WriteLine();
 			}
 			Console.WriteLine();
@@ -85,13 +77,6 @@ namespace Xadrez_console
 		{
 			ConsoleColor fundoOriginal = Console.BackgroundColor;
 			ConsoleColor fundoAlterado = ConsoleColor.DarkGray;
-			Console.Write("   ");
-			for (int i = (int)'a'; i < (tabuleiro.Colunas + 'a'); i++)
-			{
-				Console.Write($" {(char)i} ");
-			}
-			Console.WriteLine();
-			Console.WriteLine();
 			for (int i = 0; i < tabuleiro.Linhas; i++)
 			{
 				Console.Write(tabuleiro.Linhas - i + "  ");
@@ -104,7 +89,6 @@ namespace Xadrez_console
 					ImprimirPecas(tabuleiro.GetPeca(i, j));
 					Console.BackgroundColor = fundoOriginal;
 				}
-				Console.Write($"  {tabuleiro.Linhas - i}  ");
 				Console.WriteLine();
 			}
 			Console.WriteLine();

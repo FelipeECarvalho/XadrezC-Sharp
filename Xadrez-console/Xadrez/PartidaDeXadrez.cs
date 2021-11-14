@@ -159,8 +159,9 @@ namespace Xadrez
 				{
 					peao = new Posicao(posicaoDestino.Linha - 1, posicaoDestino.Coluna);
 				}
-				Tabuleiro.InserePeca(Tabuleiro.GetPeca(posicaoOrigem), posicaoDestino);
-				Tabuleiro.GetPeca(posicaoOrigem).IncrementaMovimento();
+				Peca p = Tabuleiro.RetirarPeca(posicaoOrigem);
+				Tabuleiro.InserePeca(p, posicaoDestino);
+				p.IncrementaMovimento();
 				Peca pecaCapturada = Tabuleiro.RetirarPeca(peao);
 				_pecasCapturadas.Add(pecaCapturada);
 				return pecaCapturada;
@@ -314,11 +315,20 @@ namespace Xadrez
 		public void RealizaJogada(Posicao posicaoOrigem, Posicao posicaoDestino)
 		{
 			Peca pecaCapturada = ExecutaMovimento(posicaoOrigem, posicaoDestino);
-
+			Peca p = Tabuleiro.GetPeca(posicaoDestino);
 			if (EstaEmXeque(JogadorAtual))
 			{
 				DesfazMovimento(posicaoOrigem, posicaoDestino, pecaCapturada);
 				throw new TabuleiroExceptions("Você está colocando seu rei em xeque!");
+			}
+
+			if (p is Peao && (p.Cor == Cor.Branca && posicaoDestino.Linha == 0) || (p.Cor == Cor.Preta && posicaoDestino.Linha == 7))
+			{
+				p = Tabuleiro.RetirarPeca(posicaoDestino);
+				_pecas.Remove(p);
+				Peca dama = new Dama(Tabuleiro, p.Cor);
+				Tabuleiro.InserePeca(dama, posicaoDestino);
+				_pecas.Add(dama);
 			}
 			if (EstaEmXeque(Adversario(JogadorAtual)))
 			{
