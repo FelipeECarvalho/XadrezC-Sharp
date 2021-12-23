@@ -12,6 +12,13 @@
 		{
 		}
 
+		protected Peca(Tabuleiro tabuleiro)
+		{
+			Posicao = null;
+			QteMovimentos = 0;
+			Tabuleiro = tabuleiro;
+		}
+
 		public Peca(Tabuleiro tabuleiro, Cor cor)
 		{
 			Posicao = null;

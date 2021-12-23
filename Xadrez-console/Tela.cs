@@ -7,7 +7,7 @@ namespace Xadrez_console
 {
 	class Tela
 	{
-		public static void ImprimirInformacaoDeJogo(PartidaDeXadrez partida) 
+		public static void ImprimirInformacaoDeJogoXadrez(PartidaDeXadrez partida)
 		{
 			ImprimirTabuleiro(partida.Tabuleiro);
 			Console.WriteLine();
@@ -17,18 +17,19 @@ namespace Xadrez_console
 			{
 				Console.WriteLine("Aguardando a jogada das " + (partida.JogadorAtual).ToString() + "s");
 				Console.WriteLine();
-				ImprimirPecasCapturadas(partida);
+				ImprimirPecasCapturadasXadrez(partida);
 				if (partida.Xeque)
 					Console.WriteLine("XEQUE!");
 			}
-			else 
+			else
 			{
 				Console.WriteLine("XEQUEMATE!");
 				Console.WriteLine("VITÓRIA DAS " + partida.JogadorAtual.ToString().ToUpper() + "S");
 			}
 		}
 
-		public static void ImprimirPecasCapturadas(PartidaDeXadrez partida) 
+
+		public static void ImprimirPecasCapturadasXadrez(PartidaDeXadrez partida)
 		{
 			Console.WriteLine("Pecas capturadas: ");
 			Console.Write($"Brancas: ");
@@ -38,10 +39,10 @@ namespace Xadrez_console
 			Console.ForegroundColor = ConsoleColor.Green;
 			ImprimirConjunto(partida.PecasCapturadas(Cor.Preta));
 			Console.ForegroundColor = aux;
-			
+
 		}
 
-		private static void ImprimirConjunto(HashSet<Peca> conjunto) 
+		private static void ImprimirConjunto(HashSet<Peca> conjunto)
 		{
 			Console.Write("[");
 			foreach (Peca capturada in conjunto)
@@ -59,7 +60,7 @@ namespace Xadrez_console
 				Console.Write(tabuleiro.Linhas - i + "  ");
 				for (int j = 0; j < tabuleiro.Colunas; j++)
 				{
-					ImprimirPecas(tabuleiro.GetPeca(i, j));
+					tabuleiro.GetPeca(i, j);
 
 				}
 				Console.WriteLine();
@@ -73,7 +74,7 @@ namespace Xadrez_console
 			Console.WriteLine();
 		}
 
-		public static void ImprimirTabuleiro(Tabuleiro tabuleiro, bool[,] posicoesPossiveis)
+		public static void ImprimirTabuleiroXadrez(Tabuleiro tabuleiro, bool[,] posicoesPossiveis)
 		{
 			ConsoleColor fundoOriginal = Console.BackgroundColor;
 			ConsoleColor fundoAlterado = ConsoleColor.DarkGray;
@@ -84,9 +85,9 @@ namespace Xadrez_console
 				{
 					if (posicoesPossiveis[i, j])
 						Console.BackgroundColor = fundoAlterado;
-					else 
+					else
 						Console.BackgroundColor = fundoOriginal;
-					ImprimirPecas(tabuleiro.GetPeca(i, j));
+					ImprimirPecasXadrez(tabuleiro.GetPeca(i, j));
 					Console.BackgroundColor = fundoOriginal;
 				}
 				Console.WriteLine();
@@ -101,7 +102,7 @@ namespace Xadrez_console
 		}
 
 
-		public static void ImprimirPecas(Peca peca)
+		public static void ImprimirPecasXadrez(Peca peca)
 		{
 			if (peca != null)
 			{
@@ -116,7 +117,9 @@ namespace Xadrez_console
 				}
 			}
 			else
+			{
 				Console.Write(" - ");
+			}
 		}
 	}
 }

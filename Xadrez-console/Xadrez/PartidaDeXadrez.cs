@@ -141,14 +141,14 @@ namespace Xadrez
 				ExecutaRoquePequeno(posicaoOrigem, posicaoDestino);
 				return null;
 			}
-			else if (ValidaRoqueGrande(Tabuleiro.GetPeca(posicaoOrigem)) &&
+			if (ValidaRoqueGrande(Tabuleiro.GetPeca(posicaoOrigem)) &&
 				posicaoDestino.Coluna == posicaoOrigem.Coluna - 4)
 			{
 				ExecutaRoqueGrande(posicaoOrigem, posicaoDestino);
 				return null;
 			}
 
-			else if (Tabuleiro.GetPeca(posicaoOrigem) is Peao && posicaoOrigem.Coluna != posicaoDestino.Coluna && Tabuleiro.GetPeca(posicaoDestino) == null)
+			if (Tabuleiro.GetPeca(posicaoOrigem) is Peao && posicaoOrigem.Coluna != posicaoDestino.Coluna && Tabuleiro.GetPeca(posicaoDestino) == null)
 			{
 				Posicao peao;
 				if (Tabuleiro.GetPeca(posicaoOrigem).Cor == Cor.Branca)
@@ -322,7 +322,7 @@ namespace Xadrez
 				throw new TabuleiroExceptions("Você está colocando seu rei em xeque!");
 			}
 
-			if (p is Peao && (p.Cor == Cor.Branca && posicaoDestino.Linha == 0) || (p.Cor == Cor.Preta && posicaoDestino.Linha == 7))
+			if (p is Peao && ((p.Cor == Cor.Branca && posicaoDestino.Linha == 0) || (p.Cor == Cor.Preta && posicaoDestino.Linha == 7)))
 			{
 				p = Tabuleiro.RetirarPeca(posicaoDestino);
 				_pecas.Remove(p);

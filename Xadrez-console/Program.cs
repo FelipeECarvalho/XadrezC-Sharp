@@ -8,13 +8,13 @@ namespace Xadrez_console
 	{
 		static void Main(string[] args)
 		{
+			Console.Clear();
 			PartidaDeXadrez partida = new PartidaDeXadrez();
 			while (!partida.Terminada)
 			{
 				try
 				{
-					Console.Clear();
-					Tela.ImprimirInformacaoDeJogo(partida);
+					Tela.ImprimirInformacaoDeJogoXadrez(partida);
 					Console.Write("Posição da peça: ");
 					Posicao origem = PosicaoXadrez.LerPosicaoXadrez().ConvertePosicao();
 					partida.VerificaOrigem(origem);
@@ -22,7 +22,7 @@ namespace Xadrez_console
 
 					bool[,] posicoesPossiveis = partida.Tabuleiro.GetPeca(origem).MovimentosPossiveis();
 					Console.Clear();
-					Tela.ImprimirTabuleiro(partida.Tabuleiro, posicoesPossiveis);
+					Tela.ImprimirTabuleiroXadrez(partida.Tabuleiro, posicoesPossiveis);
 
 
 					Console.Write("Posição de Destino: ");
@@ -38,11 +38,12 @@ namespace Xadrez_console
 					Console.WriteLine("ERROR: " + e.Message);
 					Console.ReadKey();
 				}
-				catch (SystemException e) 
+				catch (SystemException e)
 				{
 					Console.WriteLine("ERROR: " + e.Message);
 					Console.ReadKey();
 				}
+
 			}
 
 		}
